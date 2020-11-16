@@ -1,12 +1,9 @@
-package at.ac.tgm.hit.projekte.headupdisplay_test.bluetooth;
+package at.ac.tgm.hit.headupdisplayprototyp.bluetooth;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Intent;
-import android.widget.TextView;
-import at.ac.tgm.hit.projekte.headupdisplay_test.exceptions.BluetoothException;
+import at.ac.tgm.hit.headupdisplayprototyp.exceptions.BluetoothException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -14,7 +11,6 @@ import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.UUID;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class Utils {
     public static BluetoothSocket init() throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, BluetoothException {

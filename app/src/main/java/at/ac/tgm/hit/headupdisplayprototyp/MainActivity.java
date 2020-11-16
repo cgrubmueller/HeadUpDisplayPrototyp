@@ -2,19 +2,11 @@ package at.ac.tgm.hit.headupdisplayprototyp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
-import android.os.Bundle;
 import android.widget.TextView;
-import at.ac.tgm.hit.projekte.headupdisplay_test.bluetooth.BluetoothConnector;
-import at.ac.tgm.hit.projekte.headupdisplay_test.bluetooth.Utils;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import at.ac.tgm.hit.projekte.headupdisplay_test.exceptions.BluetoothException;
+import at.ac.tgm.hit.headupdisplayprototyp.bluetooth.BluetoothConnector;
+import at.ac.tgm.hit.headupdisplayprototyp.bluetooth.Utils;
+import at.ac.tgm.hit.headupdisplayprototyp.exceptions.BluetoothException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

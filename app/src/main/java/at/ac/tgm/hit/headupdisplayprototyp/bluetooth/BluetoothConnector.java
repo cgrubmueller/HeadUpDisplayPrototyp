@@ -1,4 +1,4 @@
-package at.ac.tgm.hit.projekte.headupdisplay_test.bluetooth;
+package at.ac.tgm.hit.headupdisplayprototyp.bluetooth;
 
 
 import android.bluetooth.BluetoothSocket;
@@ -6,6 +6,7 @@ import android.widget.TextView;
 import io.github.macfja.obd2.Commander;
 import io.github.macfja.obd2.command.livedata.AbsoluteLoadValue;
 import io.github.macfja.obd2.exception.ExceptionResponse;
+import at.ac.tgm.hit.headupdisplayprototyp.exceptions.ScriptException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

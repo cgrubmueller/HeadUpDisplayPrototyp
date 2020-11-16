@@ -1,6 +1,4 @@
-package at.ac.tgm.hit.projekte.headupdisplay_test.exceptions;
-
-import at.ac.tgm.hit.projekte.headupdisplay_test.bluetooth.BluetoothConnector;
+package at.ac.tgm.hit.headupdisplayprototyp.exceptions;
 
 public class BluetoothException extends Exception{
     String infotext="";
