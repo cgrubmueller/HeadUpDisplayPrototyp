@@ -24,12 +24,12 @@ public class BluetoothConnector {
         tv.setText(tv.getText()+"\nInstanz vom Commander wurde erstellt!");
         commander.setCommunicationInterface(OBD2.getOutputStream(), OBD2.getInputStream());
         tv.setText(tv.getText()+"\nCommander konnte erstellt und verbunden werden!");
-        try {
+        /*try {
             System.out.println(""+commander.sendCommand(new AbsoluteLoadValue()));
         } catch (ExceptionResponse exceptionResponse) {
             exceptionResponse.printStackTrace();
             tv.setText(tv.getText()+"\n"+exceptionResponse.getStackTrace());
-        }
+        }*/
         // Should print something like "OBDII to RS232 Interpreter"
         // System.out.println(commander.sendCommand(new EngineRPM()));
         // Should print something like "875rpm"
