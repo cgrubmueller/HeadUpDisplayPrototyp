@@ -33,7 +33,7 @@ public class Utils {
                 for (BluetoothDevice device : pairedDevices) {
                     System.out.println("device Name: " +device.getName() + "\t Mac: "+ device.getAddress());
                     //***********************Den Gerätenamen des Bluetooth dongles im String in der If-Anweisung eingeben**************
-                    if(device.getName().equals("CBT")||device.getName().equals("CAN OBDII")||device.getName().equals("KONNWEI")){
+                    if(device.getName().equals("CBT")||device.getName().equals("CAN OBDII")||device.getName().equals("KONNWEI") || device.getName().equals("JBL Clip 2")){
                         deviceMac=device.getAddress();
                         System.out.println("Dein gesuchtes Device hat die Adresse: "+ deviceMac);
                         System.out.println("till here");
