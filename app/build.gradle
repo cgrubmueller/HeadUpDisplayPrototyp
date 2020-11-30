@@ -30,8 +30,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //OpenCSV
-    //implementation group: 'com.opencsv', name: 'opencsv', version: '5.3'
-    //OBD2-API
-    implementation 'com.github.MacFJA:OBD2:1.1.0'
+    //API zum Auslesen
+    implementation 'com.github.pires:obd-java-api:1.0'
 }

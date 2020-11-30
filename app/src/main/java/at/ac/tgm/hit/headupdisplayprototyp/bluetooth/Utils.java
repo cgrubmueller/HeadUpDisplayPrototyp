@@ -3,48 +3,73 @@ package at.ac.tgm.hit.headupdisplayprototyp.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.util.Log;
+import at.ac.tgm.hit.headupdisplayprototyp.MainActivity;
 import at.ac.tgm.hit.headupdisplayprototyp.exceptions.BluetoothException;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
-
+import java.util.Arrays;
 
 public class Utils {
-    public static BluetoothSocket init() throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, BluetoothException {
-        String deviceMac="";
+    private static final String TAG = MainActivity.class.getName();
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final ArrayList<String> devicenames = new ArrayList<>(Arrays.asList("CBT", "CAN OBDII", "KONNWEI", "OBDII"));
+
+    public static BluetoothDevice getDevice() throws BluetoothException {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        BluetoothSocket s1=null;
-        System.out.println("1");
+        BluetoothDevice bldevice = null;
         if (bluetoothAdapter == null) {
-            // Device doesn't support Bluetooth
-            throw new BluetoothException("Device doesn't support BLuetooth!");
+            throw new BluetoothException("Device doesn't support Bluetooth!");
         }
         else if (!bluetoothAdapter.isEnabled()){
             throw new BluetoothException("Bluetooth disabled");
         }
         else  {
             Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-
             if (pairedDevices.size() > 0) {
-                // There are paired devices. Get the name and address of each paired device.
-                for (BluetoothDevice device : pairedDevices) {
-                    System.out.println("device Name: " +device.getName() + "\t Mac: "+ device.getAddress());
-                    //***********************Den Gerätenamen des Bluetooth dongles im String in der If-Anweisung eingeben**************
-                    if(device.getName().equals("CBT")||device.getName().equals("CAN OBDII")||device.getName().equals("KONNWEI") || device.getName().equals("JBL Clip 2")){
-                        deviceMac=device.getAddress();
-                        System.out.println("Dein gesuchtes Device hat die Adresse: "+ deviceMac);
-                        System.out.println("till here");
-                        s1= device.createInsecureRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-                        System.out.println("till there");
-                        Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
-                        s1=(BluetoothSocket) m.invoke(device,1);
+                boolean found = false;
+                for (BluetoothDevice device : pairedDevices) { //iterate through paired devices
+                    if(devicenames.contains(device.getName())){
+                        found = true;
+                        bldevice = device;
                     }
                 }
+                if(found == false) throw new BluetoothException("Der Dongle ist nicht gepaired oder heißt nicht richtig");
+            }else{
+                throw new BluetoothException("Der Dongle ist nicht gepaired oder heißt nicht richtig");
             }
         }
-        return s1;
+        return bldevice;
+    }
+
+    public static BluetoothSocket getSocket(BluetoothDevice dev) throws IOException {
+        BluetoothSocket sock = null;
+        BluetoothSocket sockFallback = null;
+
+        Log.d(TAG, "Starting Bluetooth connection..");
+        try {
+            sock = dev.createRfcommSocketToServiceRecord(MY_UUID);
+            sock.connect();
+            System.out.println(sock.getRemoteDevice().getName());
+        } catch (Exception e1) {
+            Log.e(TAG, "There was an error while establishing Bluetooth connection. Falling back..", e1);
+            Class<?> clazz = sock.getRemoteDevice().getClass();
+            Class<?>[] paramTypes = new Class<?>[]{Integer.TYPE};
+            try {
+                Method m = clazz.getMethod("createRfcommSocket", paramTypes);
+                Object[] params = new Object[]{Integer.valueOf(1)};
+                sockFallback = (BluetoothSocket) m.invoke(sock.getRemoteDevice(), params);
+                sockFallback.connect();
+                sock = sockFallback;
+            } catch (Exception e2) {
+                Log.e(TAG, "Couldn't fallback while establishing Bluetooth connection.", e2);
+                throw new IOException(e2.getMessage());
+            }
+        }
+        return sock;
     }
 }
