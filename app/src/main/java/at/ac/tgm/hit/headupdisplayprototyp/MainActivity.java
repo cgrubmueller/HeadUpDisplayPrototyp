@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv;
     private SpeedReader speed;
     private FuelReader fuel;
+    private TextView speedView;
+    private TextView fuelView;
     private BluetoothSocket socket;
 
     @Override
@@ -23,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv = findViewById(R.id.textView);
+
+        this.speedView = findViewById(R.id.speedView);
+        this.fuelView = findViewById(R.id.fuelView);
 
         this.speed = new SpeedReader();
         this.fuel = new FuelReader();
@@ -33,10 +38,17 @@ public class MainActivity extends AppCompatActivity {
             Updater updater = new Updater(new Runnable() {
                 @Override
                 public void run() {
-                    /*
-                    SpeedView.setText(speed.getSpeed());
-                    FuelView.setText(fuel.getFuelLevel();
-                     */
+
+                    try {
+                        speedView.setText(speed.getSpeed(socket));
+                        fuelView.setText(fuel.getFuelLevel(socket));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //speedView.setText(System.nanoTime()+"");
+                    //fuelView.setText(System.nanoTime()+"");
                 }
             }, 500);// 500ms => 0.5s
 
