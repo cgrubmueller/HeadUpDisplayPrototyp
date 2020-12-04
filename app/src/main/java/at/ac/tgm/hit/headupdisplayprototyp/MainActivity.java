@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
 
                     try {
-                        speedView.setText(speed.getSpeed(socket));
-                        fuelView.setText(fuel.getFuelLevel(socket));
+                        speedView.setText(speed.getFormattedSpeed(socket));
+                        fuelView.setText(fuel.getFormattedFuelLevel(socket));
                     } catch (IOException e) {
                         errorView.setText("in run():    " + e.getMessage());
                         e.printStackTrace();

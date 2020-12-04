@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class Utils {
     private static final String TAG = MainActivity.class.getName();
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private static final ArrayList<String> devicenames = new ArrayList<>(Arrays.asList("CBT", "CAN OBDII", "KONNWEI", "OBDII", "JBL Clip 2"));
+    private static final ArrayList<String> devicenames = new ArrayList<>(Arrays.asList("CBT", "KONNWEI","CAN OBDII","JBL Clip 2"));
 
     public static BluetoothDevice getDevice() throws BluetoothException {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
