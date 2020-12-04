@@ -12,7 +12,7 @@
             android:layout_height="match_parent" android:id="@+id/linearLayout">
         <TextView
                 android:layout_width="330dp"
-                android:layout_height="400dp" android:id="@+id/textView" app:layout_anchorGravity="center"
+                android:layout_height="400dp" android:id="@+id/errorView" app:layout_anchorGravity="center"
 
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:textSize="24sp" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"/>

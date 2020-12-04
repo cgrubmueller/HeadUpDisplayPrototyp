@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tv;
+    private TextView errorView;
     private SpeedReader speed;
     private FuelReader fuel;
     private TextView speedView;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tv = findViewById(R.id.textView);
+        errorView = findViewById(R.id.errorView);
 
         this.speedView = findViewById(R.id.speedView);
         this.fuelView = findViewById(R.id.fuelView);
@@ -43,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
                         speedView.setText(speed.getSpeed(socket));
                         fuelView.setText(fuel.getFuelLevel(socket));
                     } catch (IOException e) {
+                        errorView.setText(e.getMessage());
                         e.printStackTrace();
                     } catch (InterruptedException e) {
+                        errorView.setText(e.getMessage());
                         e.printStackTrace();
                     }
                     //speedView.setText(System.nanoTime()+"");
@@ -55,9 +57,11 @@ public class MainActivity extends AppCompatActivity {
             updater.startUpdates();
 
         } catch (IOException e) {
-            //errorView.setText(e.getMessage);
+            errorView.setText(e.getMessage());
+            e.printStackTrace();
         } catch (BluetoothException e) {
-            //errorView.setText(e.getMessage);
+            errorView.setText(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

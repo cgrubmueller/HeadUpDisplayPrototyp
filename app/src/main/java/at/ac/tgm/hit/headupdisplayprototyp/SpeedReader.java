@@ -20,6 +20,7 @@ public class SpeedReader {
      * @throws InterruptedException
      */
     public String getSpeed(BluetoothSocket socket) throws IOException, InterruptedException {
+        System.out.println("Speed wird ausgelesen");
         this.speed.run(socket.getInputStream(), socket.getOutputStream());
         return this.speed.getResult();
     }
