@@ -43,6 +43,7 @@ public class Utils {
                 throw new BluetoothException("Der Dongle ist nicht gepaired oder heißt nicht richtig");
             }
         }
+        System.out.println("Bluetothdevicename: " + bldevice.getName());
         return bldevice;
     }
 
