@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         speedView.setText(speed.getSpeed(socket));
                         fuelView.setText(fuel.getFuelLevel(socket));
                     } catch (IOException e) {
-                        errorView.setText(e.getMessage());
+                        errorView.setText("in run():    " + e.getMessage());
                         e.printStackTrace();
                     } catch (InterruptedException e) {
                         errorView.setText(e.getMessage());
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             updater.startUpdates();
 
         } catch (IOException e) {
-            errorView.setText(e.getMessage());
+            errorView.setText("in onCreate:    " + e.getMessage());
             e.printStackTrace();
         } catch (BluetoothException e) {
             errorView.setText(e.getMessage());
